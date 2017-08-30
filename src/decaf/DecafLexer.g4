@@ -19,8 +19,10 @@ RCURLY : '}';
 
 ID  :
   ('a'..'z' | 'A'..'Z')+;
+  
+NUMBER : ('0'..'9')+;
 
-WS_ : (' ' | '\n' ) -> skip;
+WS_ : (' ' | '\n' | '	' | '\t' )+ -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 

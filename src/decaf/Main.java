@@ -52,7 +52,15 @@ class Main {
 		        				break;
 
 						case DecafLexer.HEX:
-		        				type = " INTLITERAL";
+		        				type = "INTLITERAL";
+		        				break;
+
+						case DecafLexer.OP:
+		        				type = " OPERATORS";
+		        				break;
+
+						case DecafLexer.STRING:
+		        				type = " STRING";
 		        				break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);

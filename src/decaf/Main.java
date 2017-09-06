@@ -42,6 +42,18 @@ class Main {
 						case DecafLexer.WS_:
 		        				type = " WHITESPACE";
 		        				break;
+
+						case DecafLexer.ESPEC:
+		        				type = " ESPECIAL";
+		        				break;
+
+						case DecafLexer.NUMBER:
+		        				type = " NUMBER";
+		        				break;
+
+						case DecafLexer.HEX:
+		        				type = " INTLITERAL";
+		        				break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}

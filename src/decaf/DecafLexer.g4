@@ -17,7 +17,8 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-ID : [a-zA-Z]+;
+ID : [_a-zA-Z][_0-9a-zA-Z]?;
+IDS : (ID)+;
 
 HEX : '0x'('0'..'9'|'a'..'f'|'A'..'F')+; 
   
@@ -32,7 +33,10 @@ WS_ : (' '|'\n'|'\t')+ -> skip;
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
 CHAR : '\'' ALL '\'';
-STRING : '\"' ALL* '\"';
+STRING : '"' ALLS* '"';
 
 fragment ESC :  '\\' ('n'|'"'|'t'|'\\');
 fragment ALL : (ID|NUMBER|ESPEC|ESC|OP);
+//fragment ALLS : (IDS|NUMBER|ESPEC|ESC|OP);
+
+SE: 'if';

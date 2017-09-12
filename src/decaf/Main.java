@@ -34,15 +34,15 @@ class Main {
 		        			case DecafLexer.ID:
 		        				type = " IDENTIFIER";
 		        				break;
+
+		        			case DecafLexer.IDS:
+		        				type = " IDENTIFIER";
+		        				break;
 		        			
 						case DecafLexer.CHAR:
 		        				type = " CHARLITERAL";
 		        				break;
 						
-						case DecafLexer.WS_:
-		        				type = " WHITESPACE";
-		        				break;
-
 						case DecafLexer.ESPEC:
 		        				type = " ESPECIAL";
 		        				break;
@@ -52,7 +52,7 @@ class Main {
 		        				break;
 
 						case DecafLexer.HEX:
-		        				type = "INTLITERAL";
+		        				type = " HEXADECIMAL";
 		        				break;
 
 						case DecafLexer.OP:

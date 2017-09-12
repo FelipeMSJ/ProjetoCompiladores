@@ -17,12 +17,17 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-ID : [_a-zA-Z][_0-9a-zA-Z]?;
-IDS : (ID)+;
+SE: 'if';
 
-HEX : '0x'('0'..'9'|'a'..'f'|'A'..'F')+; 
-  
-NUMBER :[0-9]+;
+ID: ('_' | LETTER)('_' |  LETTER | NUMBER)* ;  
+
+LETTER: ('a'..'z' | 'A'..'Z'); 
+
+HEX : '0x'(NUMBER | 'a'..'f' | 'A'..'F')+ ;
+
+DECIMAL: NUMBER+;
+
+NUMBER: ('0'..'9');
 
 OP: ('+'|'-'|'*'|'<'|'>'|'<='|'>='|'!='|'&&');
 
@@ -32,11 +37,10 @@ WS_ : (' '|'\n'|'\t')+ -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : '\'' ALL '\'';
-STRING : '"' ALLS* '"';
+CHARLITERAL: '\'' ( ESC | CHAR ) '\'' ;
 
-fragment ESC :  '\\' ('n'|'"'|'t'|'\\');
-fragment ALL : (ID|NUMBER|ESPEC|ESC|OP);
-//fragment ALLS : (IDS|NUMBER|ESPEC|ESC|OP);
+STRING: '"' ( CHAR | ESC )* '"' ;
 
-SE: 'if';
+CHAR: ']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' ;
+
+fragment ESC: '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;

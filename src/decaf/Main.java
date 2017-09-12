@@ -35,11 +35,11 @@ class Main {
 		        				type = " IDENTIFIER";
 		        				break;
 
-		        			case DecafLexer.IDS:
-		        				type = " IDENTIFIER";
-		        				break;
+		        			//case DecafLexer.IDS:
+		        			//	type = " IDENTIFIER";
+		        			//	break;
 		        			
-						case DecafLexer.CHAR:
+						case DecafLexer.CHARLITERAL:
 		        				type = " CHARLITERAL";
 		        				break;
 						
@@ -47,7 +47,7 @@ class Main {
 		        				type = " ESPECIAL";
 		        				break;
 
-						case DecafLexer.NUMBER:
+						case DecafLexer.DECIMAL:
 		        				type = " NUMBER";
 		        				break;
 
@@ -61,6 +61,10 @@ class Main {
 
 						case DecafLexer.STRING:
 		        				type = " STRING";
+		        				break;
+
+						case DecafLexer.SE:
+		        				type = " ";
 		        				break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);

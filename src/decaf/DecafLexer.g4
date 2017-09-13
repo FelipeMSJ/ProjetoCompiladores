@@ -18,8 +18,22 @@ LCURLY : '{';
 RCURLY : '}';
 
 SE: 'if';
+SENAO: 'else';
+BOOL: 'boolean';
+QUEBRAR: 'break';
+CHAMARFORA: 'callout';
+CLASSE: 'class';
+CONT: 'continue';
+FALSO: 'false';
+PARA: 'for';
+INTEIRO: 'int';
+RETORNE: 'return';
+VERIDICO: 'true';
+LIMBO: 'void';
 
-ID: ('_' | LETTER)('_' |  LETTER | NUMBER)* ;  
+PR: (SE|SENAO|BOOL|QUEBRAR|CHAMARFORA|CLASSE|CONT|FALSO|PARA|INTEIRO|RETORNE|VERIDICO|LIMBO);
+
+ID: ('_' | LETTER )('_' |  LETTER | NUMBER)*;  
 
 LETTER: ('a'..'z' | 'A'..'Z'); 
 
@@ -29,7 +43,7 @@ DECIMAL: NUMBER+;
 
 NUMBER: ('0'..'9');
 
-OP: ('+'|'-'|'*'|'<'|'>'|'<='|'>='|'!='|'&&');
+OP: ('+'|'-'|'*'|'<'|'>'|'<='|'>='|'!='|'&&'|'=='|'||');
 
 ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'('|')'|'_'|'='|'{'|'}'|'.');
 

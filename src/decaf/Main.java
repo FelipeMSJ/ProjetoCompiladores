@@ -39,12 +39,12 @@ class Main {
 		        				type = " CHARLITERAL";
 		        				break;
 						
-						case DecafLexer.ESPEC:
-		        				type = " ESPECIAL";
-		        				break;
+						// case DecafLexer.ESPEC:
+		        			//	type = " ESPECIAL";
+		        			//	break;
 
 						case DecafLexer.DECIMAL:
-		        				type = " NUMBER";
+		        				type = " DECIMAL";
 		        				break;
 
 						case DecafLexer.HEX:

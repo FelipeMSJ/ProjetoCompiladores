@@ -33,28 +33,30 @@ LIMBO: 'void';
 
 PR: (SE|SENAO|BOOL|QUEBRAR|CHAMARFORA|CLASSE|CONT|FALSO|PARA|INTEIRO|RETORNE|VERIDICO|LIMBO);
 
-ID: ('_' | LETTER )('_' |  LETTER | NUMBER)*;  
-
-LETTER: ('a'..'z' | 'A'..'Z'); 
-
-HEX : '0x'(NUMBER | 'a'..'f' | 'A'..'F')+ ;
+HEX : '0x' HEXCHARS+ ;
 
 DECIMAL: NUMBER+;
 
-NUMBER: ('0'..'9');
-
 OP: ('+'|'-'|'*'|'<'|'>'|'<='|'>='|'!='|'&&'|'=='|'||');
-
-ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'('|')'|'_'|'='|'{'|'}'|'.');
-
-WS_ : (' '|'\n'|'\t')+ -> skip;
-
-SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
 CHARLITERAL: '\'' ( ESC | CHAR ) '\'' ;
 
 STRING: '"' ( CHAR | ESC )* '"' ;
 
-CHAR: ']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' ;
+ID: ('_'|LETTER)('_'|LETTER|NUMBER)+; 
+
+WS_ : (' '|'\n'|'\t'|'\r')+ -> skip;
+
+SL_COMMENT : '//' (~'\n')* '\n' -> skip;
+
+//ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'('|')'|'_'|'='|'{'|'}'|'.');
+
+fragment LETTER: [a-zA-Z];
+
+fragment CHAR: ']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' ;
+
+fragment HEXCHARS: [0-9a-fA-F];
+
+fragment NUMBER: [0-9];
 
 fragment ESC: '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;

@@ -51,17 +51,17 @@ class Main {
 		        				type = " HEXADECIMAL";
 		        				break;
 
-						case DecafLexer.OP:
-		        				type = " OPERATORS";
-		        				break;
+						//case DecafLexer.OP:
+		        			//	type = " OPERATORS";
+		        			//	break;
 
 						case DecafLexer.STRING:
 		        				type = " STRING";
 		        				break;
 
-						case DecafLexer.PR:
-		        				type = " TOKENS";
-		        				break;
+						//case DecafLexer.PR:
+		        			//	type = " TOKENS";
+		        			//	break;
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}

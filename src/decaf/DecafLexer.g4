@@ -14,8 +14,16 @@ tokens
   TK_class
 }
 
+OP: ('+'|'-'|'*'|'<'|'>'|'<='|'>='|'!='|'&&'|'=='|'||');
+
 LCURLY : '{';
 RCURLY : '}';
+
+LPAREN : '(';
+RPAREN : ')';
+
+LCOLCH : '[';
+RCOLCH : ']';
 
 SE: 'if';
 SENAO: 'else';
@@ -31,31 +39,25 @@ RETORNE: 'return';
 VERIDICO: 'true';
 LIMBO: 'void';
 
-PR: (SE|SENAO|BOOL|QUEBRAR|CHAMARFORA|CLASSE|CONT|FALSO|PARA|INTEIRO|RETORNE|VERIDICO|LIMBO);
-
-HEX : '0x' HEXCHARS+ ;
+HEX : '0x'[0-9a-fA-F]+ ;
 
 DECIMAL: NUMBER+;
 
-OP: ('+'|'-'|'*'|'<'|'>'|'<='|'>='|'!='|'&&'|'=='|'||');
+CHARLITERAL: '\'' ( CHAR | ESC | ESPEC) '\'' ;
 
-CHARLITERAL: '\'' ( ESC | CHAR ) '\'' ;
+STRING: '"' ( CHAR | ESC | ESPEC)* '"' ; 
 
-STRING: '"' ( CHAR | ESC )* '"' ;
-
-ID: ('_'|LETTER)('_'|LETTER|NUMBER)+; 
-
-WS_ : (' '|'\n'|'\t'|'\r')+ -> skip;
+ID: ('_'|LETTER)(NUMBER|LETTER|'_')*;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-//ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'('|')'|'_'|'='|'{'|'}'|'.');
+WS_ : (' '|'\n'|'\t'|'\r')+ -> skip;
+
+ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'_'|'='|'.'|';'|',');
 
 fragment LETTER: [a-zA-Z];
 
 fragment CHAR: ']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' ;
-
-fragment HEXCHARS: [0-9a-fA-F];
 
 fragment NUMBER: [0-9];
 

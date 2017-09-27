@@ -26,14 +26,14 @@ statement: location assing_op expr ';'
 	| method_call ';' 
 	| SE (expr) block [SENAO block]
 	| PARA (id = expr ';' expr ';' block)
-	| RETORNE [expr] ';'
+	| RETORNE expr ';'
 	| QUEBRAR ';'
 	| CONT ';'
 	| block;
 
 assing_op: '=' | '+=' | '-=';
 
-method_call: method_name ([expr+,])
+method_call: method_name (expr+,)
 	| CHAMARFORA (string_literal [, callout_arg+,]);
 
 method_name: id;

@@ -12,29 +12,30 @@ options
 
 program: CLASSE Program LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: {type id | type id LCOLCH int_literal RCOLCH }+,';';
+field_decl: {type id(VIRGULA type id)* 
+	| type id LCOLCH int_literal RCOLCH (VIRGULA type id LCOLCH int_literal RCOLCH)* }PVIRGULA;
 
-method_decl: {type | LIMBO} id LPAREN [{type id}+,] RPAREN block;
+method_decl: {type | LIMBO} id LPAREN RPAREN block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: type id+, ';';
+var_decl: type id(VIRGULA id)* PVIRGULA;
 
 type: INTEIRO | BOOL;
 
-statement: location assing_op expr ';' 
-	| method_call ';' 
+statement: location assing_op expr PVIRGULA 
+	| method_call PVIRGULA 
 	| SE (expr) block [SENAO block]
-	| PARA (id = expr ';' expr ';' block)
-	| RETORNE expr ';'
-	| QUEBRAR ';'
-	| CONT ';'
+	//| PARA ( id = expr PVIRGULA expr PVIRGULA block)
+	| RETORNE expr PVIRGULA
+	| QUEBRAR PVIRGULA
+	| CONT PVIRGULA
 	| block;
 
-assing_op: '=' | '+=' | '-=';
+assing_op: ASSING_OP;
 
-method_call: method_name (expr+,)
-	| CHAMARFORA (string_literal [, callout_arg+,]);
+method_call: method_name (expr (VIRGULA expr)*)
+	| CHAMARFORA (string_literal [, callout_arg (VIRGULA callout_arg)*]);
 
 method_name: id;
 
@@ -45,8 +46,8 @@ expr: location
 	|method_call
 	|literal
 	|expr bin_op expr
-	|'-'expr
-	|'!'expr
+	|MENOS expr
+	|EXCLA expr
 	|(expr);
 
 callout_arg: expr
@@ -68,12 +69,14 @@ id: ID;
 
 decimal_literal: DECIMAL;
 
+hex_digit: HEXD;
+
 int_literal: decimal_literal | hex_digit;
 
 hex_literal: HEX;
 
 bool_literal: FALSO|VERIDICO;
 
-char_literal: CHAR;
+char_literal: CHARLITERAL;
 
 string_literal: STRING;

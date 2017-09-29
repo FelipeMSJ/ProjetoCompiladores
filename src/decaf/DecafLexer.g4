@@ -19,6 +19,7 @@ AR_OP: ('+'|'-'|'*'|'/'|'%');
 REL_OP: ('<'|'>'|'<='|'>=');
 EQ_OP: ('==' | '!=');
 COND_OP: ('&&' |'||');
+ASSING_OP: ('=' | '+=' | '-=');
 
 LCURLY : '{';
 RCURLY : '}';
@@ -28,6 +29,12 @@ RPAREN : ')';
 
 LCOLCH : '[';
 RCOLCH : ']';
+
+PVIRGULA: ';';
+VIRGULA: ',';
+
+EXCLA: '!';
+MENOS: '-';
 
 SE: 'if';
 SENAO: 'else';
@@ -45,7 +52,11 @@ LIMBO: 'void';
 
 HEX : '0x'[0-9a-fA-F]+ ;
 
+HEXD: NUMBER [0-9a-fA-F];
+
 DECIMAL: NUMBER+;
+
+NUMBER: [0-9];
 
 CHARLITERAL: '\'' ( CHAR | ESC | ESPEC) '\'' ;
 
@@ -57,12 +68,10 @@ SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
 WS_ : (' '|'\n'|'\t'|'\r')+ -> skip;
 
-ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'_'|'='|'.'|';'|',');
+ESPEC: ('!'|'@'|'#'|'$'|'%'|'^'|'&'|'*'|'_'|'='|'.');
 
 fragment LETTER: [a-zA-Z];
 
 fragment CHAR: ']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' ;
-
-fragment NUMBER: [0-9];
 
 fragment ESC: '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;

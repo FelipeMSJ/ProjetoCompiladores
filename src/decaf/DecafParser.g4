@@ -10,12 +10,12 @@ options
   tokenVocab=DecafLexer;
 }
 
-program: CLASSE Program LCURLY field_decl* method_decl* RCURLY;
+program: CLASSE PROGRAMA LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: {type id(VIRGULA type id)* 
-	| type id LCOLCH int_literal RCOLCH (VIRGULA type id LCOLCH int_literal RCOLCH)* }PVIRGULA;
+field_decl: type id(VIRGULA type id)* 
+	| type id LCOLCH int_literal RCOLCH (VIRGULA type id LCOLCH int_literal RCOLCH)* PVIRGULA;
 
-method_decl: {type | LIMBO} id LPAREN RPAREN block;
+method_decl: (type | LIMBO) id LPAREN (type id (VIRGULA type id)*) RPAREN block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
@@ -25,17 +25,17 @@ type: INTEIRO | BOOL;
 
 statement: location assing_op expr PVIRGULA 
 	| method_call PVIRGULA 
-	| SE (expr) block [SENAO block]
-	//| PARA ( id = expr PVIRGULA expr PVIRGULA block)
+	| SE (expr) block (SENAO block)
+	| PARA ( id IGUAL expr PVIRGULA expr PVIRGULA block)
 	| RETORNE expr PVIRGULA
 	| QUEBRAR PVIRGULA
 	| CONT PVIRGULA
-	| block;
+	| QUEBRAR;
 
 assing_op: ASSING_OP;
 
 method_call: method_name (expr (VIRGULA expr)*)
-	| CHAMARFORA (string_literal [, callout_arg (VIRGULA callout_arg)*]);
+	| CHAMARFORA (string_literal (VIRGULA callout_arg (VIRGULA callout_arg)*));
 
 method_name: id;
 
@@ -48,7 +48,7 @@ expr: location
 	|expr bin_op expr
 	|MENOS expr
 	|EXCLA expr
-	|(expr);
+	|LPAREN expr RPAREN;
 
 callout_arg: expr
 	|string_literal;

@@ -20,6 +20,7 @@ REL_OP: ('<'|'>'|'<='|'>=');
 EQ_OP: ('==' | '!=');
 COND_OP: ('&&' |'||');
 ASSING_OP: ('=' | '+=' | '-=');
+IGUAL: ('=');
 
 LCURLY : '{';
 RCURLY : '}';
@@ -36,6 +37,7 @@ VIRGULA: ',';
 EXCLA: '!';
 MENOS: '-';
 
+PROGRAMA: 'Program';
 SE: 'if';
 SENAO: 'else';
 BOOL: 'boolean';

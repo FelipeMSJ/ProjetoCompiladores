@@ -71,7 +71,11 @@ decimal_literal: DECIMAL;
 
 hex_digit: HEXD;
 
+<<<<<<< HEAD
 int_literal: INT_LITERAL;
+=======
+int_literal: decimal_literal | hex_digit;
+>>>>>>> 281234b8e7147455246c4fcfc2127305e60d65e1
 
 hex_literal: HEX;
 

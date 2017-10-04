@@ -12,10 +12,10 @@ options
 
 program: CLASSE PROGRAMA LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: type id(VIRGULA type id)* 
+field_decl: type id (VIRGULA type id)* PVIRGULA
 	| type id LCOLCH int_literal RCOLCH (VIRGULA type id LCOLCH int_literal RCOLCH)* PVIRGULA;
 
-method_decl: (type | LIMBO) id LPAREN (type id (VIRGULA type id)*) RPAREN block;
+method_decl: (type | LIMBO) id LPAREN (type id (VIRGULA type id)*)? RPAREN block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
@@ -25,17 +25,17 @@ type: INTEIRO | BOOL;
 
 statement: location assing_op expr PVIRGULA 
 	| method_call PVIRGULA 
-	| SE (expr) block (SENAO block)
+	| SE (expr) block (SENAO block)?
 	| PARA ( id IGUAL expr PVIRGULA expr PVIRGULA block)
-	| RETORNE expr PVIRGULA
+	| RETORNE (expr)? PVIRGULA
 	| QUEBRAR PVIRGULA
 	| CONT PVIRGULA
 	| QUEBRAR;
 
 assing_op: ASSING_OP;
 
-method_call: method_name (expr (VIRGULA expr)*)
-	| CHAMARFORA (string_literal (VIRGULA callout_arg (VIRGULA callout_arg)*));
+method_call: method_name LPAREN (expr (VIRGULA expr)*)? RPAREN
+	| CHAMARFORA LPAREN (string_literal (VIRGULA callout_arg (VIRGULA callout_arg)*)?) RPAREN;
 
 method_name: id;
 
@@ -71,7 +71,7 @@ decimal_literal: DECIMAL;
 
 hex_digit: HEXD;
 
-int_literal: decimal_literal | hex_digit;
+int_literal: (MENOS)? decimal_literal | hex_digit;
 
 hex_literal: HEX;
 

@@ -26,13 +26,13 @@ type: INTEIRO | BOOL;
 statement: location assing_op expr PVIRGULA 
 	| method_call PVIRGULA 
 	| SE (expr) block (SENAO block)?
-	| PARA ( id IGUAL expr PVIRGULA expr PVIRGULA block)
+	| PARA ( id IGUAL expr (VIRGULA expr)? (PVIRGULA expr PVIRGULA)? block)
 	| RETORNE (expr)? PVIRGULA
 	| QUEBRAR PVIRGULA
 	| CONT PVIRGULA
 	| QUEBRAR;
 
-assing_op: ASSING_OP;
+assing_op: (ASSING_OP|IGUAL);
 
 method_call: method_name LPAREN (expr (VIRGULA expr)*)? RPAREN
 	| CHAMARFORA LPAREN (string_literal (VIRGULA callout_arg (VIRGULA callout_arg)*)?) RPAREN;
@@ -45,7 +45,7 @@ location: id
 expr: location
 	|method_call
 	|literal
-	|expr bin_op expr
+	|expr (bin_op|MENOS) expr
 	|MENOS expr
 	|EXCLA expr
 	|LPAREN expr RPAREN;
@@ -67,11 +67,11 @@ literal: int_literal | char_literal | bool_literal;
 
 id: ID;
 
-decimal_literal: (MENOS)? DECIMAL;
+decimal_literal: DECIMAL;
 
 hex_digit: HEXD;
 
-int_literal: decimal_literal | hex_digit;
+int_literal: INT_LITERAL;
 
 hex_literal: HEX;
 

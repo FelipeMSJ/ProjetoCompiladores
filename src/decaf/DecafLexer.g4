@@ -15,12 +15,11 @@ tokens
 }
 
 OP: (AR_OP|REL_OP|EQ_OP|COND_OP);
-AR_OP: ('+'|'-'|'*'|'/'|'%');
+AR_OP: ('+'|'*'|'/'|'%');
 REL_OP: ('<'|'>'|'<='|'>=');
 EQ_OP: ('==' | '!=');
 COND_OP: ('&&' |'||');
-ASSING_OP: ('=' | '+=' | '-=');
-IGUAL: ('=');
+ASSING_OP: ('+=' | '-=');
 
 LCURLY : '{';
 RCURLY : '}';
@@ -36,6 +35,7 @@ VIRGULA: ',';
 
 EXCLA: '!';
 MENOS: '-';
+IGUAL: '=';
 
 PROGRAMA: 'Program';
 SE: 'if';

@@ -32,7 +32,8 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
 
     @Override
     public void enterMethod_decl(DecafParser.Method_declContext ctx) {
-        String name = ctx.IDENTIFIER().getText();
+
+        String name = ctx.ID().getText();
         int typeTokenType = ctx.type().start.getType();
         DecafSymbol.Type type = this.getType(typeTokenType);
 
@@ -63,19 +64,19 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
     }
 
     @Override
-    public void enterDecl(DecafParser.DeclContext ctx) {
-        defineVar(ctx.type(), ctx.IDENTIFIER().getSymbol());
+    public void enterField_decl(DecafParser.Field_declContext ctx) {
+        defineVar(ctx.type(), ctx.ID().getSymbol());
     }
 
     @Override
-    public void exitDecl(DecafParser.DeclContext ctx) {
-        String name = ctx.IDENTIFIER().getSymbol().getText();
+    public void exitField_decl(DecafParser.Field_declContext ctx) {
+        String name = ctx.ID().getSymbol().getText();
         Symbol var = currentScope.resolve(name);
         if ( var==null ) {
-            this.error(ctx.IDENTIFIER().getSymbol(), "no such variable: "+name);
+            this.error(ctx.ID().getSymbol(), "no such variable: "+name);
         }
         if ( var instanceof FunctionSymbol ) {
-            this.error(ctx.IDENTIFIER().getSymbol(), name+" is not a variable");
+            this.error(ctx.ID().getSymbol(), name+" is not a variable");
         }
     }
 
@@ -130,8 +131,8 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
      */
     public static DecafSymbol.Type getType(int tokenType) {
         switch ( tokenType ) {
-            case DecafParser.VOID :  return DecafSymbol.Type.tVOID;
-            case DecafParser.INTEGER_LITERAL :   return DecafSymbol.Type.tINT;
+            case DecafParser.LIMBO :  return DecafSymbol.Type.tVOID;
+            case DecafParser.INT_LITERAL :   return DecafSymbol.Type.tINT;
         }
         return DecafSymbol.Type.tINVALID;
     }

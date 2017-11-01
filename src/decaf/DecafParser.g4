@@ -2,6 +2,7 @@ parser grammar DecafParser;
 
 @header {
 package decaf;
+
 }
 
 options
@@ -12,21 +13,23 @@ options
 
 program: CLASSE PROGRAMA LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: type id (VIRGULA type id)* PVIRGULA
-	| type id LCOLCH int_literal RCOLCH (VIRGULA type id LCOLCH int_literal RCOLCH)* PVIRGULA;
+field_decl: type ID (VIRGULA type ID)* PVIRGULA
+	| type ID LCOLCH int_literal RCOLCH (VIRGULA type ID LCOLCH int_literal RCOLCH)* PVIRGULA;
 
-method_decl: (type | LIMBO) id LPAREN (type id (VIRGULA type id)*)? RPAREN block;
+method_decl: (type | LIMBO) ID LPAREN (param (VIRGULA param)*)? RPAREN block;
+
+param: type ID;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: type id(VIRGULA id)* PVIRGULA;
+var_decl: type ID(VIRGULA ID)* PVIRGULA;
 
 type: INTEIRO | BOOL;
 
 statement: location assing_op expr PVIRGULA 
 	| method_call PVIRGULA 
 	| SE (expr) block (SENAO block)?
-	| PARA ( id IGUAL expr (VIRGULA expr)? (PVIRGULA expr PVIRGULA)? block)
+	| PARA ( ID IGUAL expr (VIRGULA expr)? (PVIRGULA expr PVIRGULA)? block)
 	| RETORNE (expr)? PVIRGULA
 	| QUEBRAR PVIRGULA
 	| CONT PVIRGULA
@@ -37,10 +40,10 @@ assing_op: (ASSING_OP|IGUAL);
 method_call: method_name LPAREN (expr (VIRGULA expr)*)? RPAREN
 	| CHAMARFORA LPAREN (string_literal (VIRGULA callout_arg (VIRGULA callout_arg)*)?) RPAREN;
 
-method_name: id;
+method_name: ID;
 
-location: id 
-	| id LCOLCH expr RCOLCH;
+location: ID 
+	| ID LCOLCH expr RCOLCH;
 
 expr: location
 	|method_call
@@ -64,8 +67,6 @@ eq_op: EQ_OP;
 cond_op: COND_OP;
 
 literal: int_literal | char_literal | bool_literal;
-
-id: ID;
 
 decimal_literal: DECIMAL;
 

@@ -13,8 +13,8 @@ options
 
 program: CLASSE PROGRAMA LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: type ID (VIRGULA type ID)* PVIRGULA
-	| type ID LCOLCH int_literal RCOLCH (VIRGULA type ID LCOLCH int_literal RCOLCH)* PVIRGULA;
+field_decl: type ID (VIRGULA param)* PVIRGULA
+	| type ID LCOLCH int_literal RCOLCH (VIRGULA param LCOLCH int_literal RCOLCH)* PVIRGULA;
 
 method_decl: (type | LIMBO) ID LPAREN (param (VIRGULA param)*)? RPAREN block;
 
@@ -22,7 +22,7 @@ param: type ID;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: type ID(VIRGULA ID)* PVIRGULA;
+var_decl: param (VIRGULA ID)* PVIRGULA;
 
 type: INTEIRO | BOOL;
 
